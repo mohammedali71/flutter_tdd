@@ -28,7 +28,7 @@ class LoginDemo extends StatefulWidget {
 class _LoginDemoState extends State<LoginDemo> {
   final usernameTFController = TextEditingController();
   final passwordTFController = TextEditingController();
-//  final usernameValidation = TextfieldValidation();
+  //final usernameValidation = TextfieldValidation();
 
   @override
   void dispose() {
@@ -53,7 +53,6 @@ class _LoginDemoState extends State<LoginDemo> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
-                validation: ,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
@@ -61,7 +60,6 @@ class _LoginDemoState extends State<LoginDemo> {
                         'Enter valid email id as abc@gmail.com'), //prompts the user
                 key: const Key("username"), // collects the username
                 controller: usernameTFController, //stores the username in this
-
               ),
             ),
             Padding(
@@ -87,8 +85,11 @@ class _LoginDemoState extends State<LoginDemo> {
               ),
               child: const Text('Log in'),
               onPressed: () {
-                log('login successful!');
-              },
+                // ignore: unrelated_type_equality_checks
+                if (TextfieldValidation.checkTextField == false) {
+                  log('login unsuccessful');}
+                else {log('login successful!');}
+                }
             ),
             const SizedBox(
               height: 130,
