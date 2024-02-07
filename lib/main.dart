@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:developer';
+import 'textfield_validation.dart';
 //import dart developer package to use the logging method
 
 void main() {
@@ -28,7 +29,7 @@ class LoginDemo extends StatefulWidget {
 class _LoginDemoState extends State<LoginDemo> {
   final usernameTFController = TextEditingController();
   final passwordTFController = TextEditingController();
-  //final usernameValidation = TextfieldValidation();
+  final usernameValidation = TextfieldValidation();
 
   @override
   void dispose() {
@@ -80,17 +81,28 @@ class _LoginDemoState extends State<LoginDemo> {
             ),
             const SizedBox(height: 30),
             TextButton(
-              style: TextButton.styleFrom(
-                textStyle: const TextStyle(fontSize: 20),
-              ),
-              child: const Text('Log in'),
-              onPressed: () {
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                child: const Text('Log in'),
+                onPressed: () {
+                  String emailText = usernameTFController.text;
+                  bool status =
+                      usernameValidation.checkTextField(emailText, "email");
+
+                  if (status == true) {
+                    log("email is correct");
+                  } else {
+                    log("email is incorrect");
+                  }
+                }
+
                 // ignore: unrelated_type_equality_checks
-                if (TextfieldValidation.checkTextField == false) {
+                /*if (TextfieldValidation.checkTextField == false) {
                   log('login unsuccessful');}
                 else {log('login successful!');}
-                }
-            ),
+                }*/
+                ),
             const SizedBox(
               height: 130,
             ),
@@ -101,8 +113,8 @@ class _LoginDemoState extends State<LoginDemo> {
   }
 }
 
-//textfield validation 
-class TextfieldValidation {
+//textfield validation
+/*class TextfieldValidation {
   bool checkTextField(String textToCheck, String type) {
     bool tfCheck = false;
     if (textToCheck.isNotEmpty) {
@@ -116,4 +128,4 @@ class TextfieldValidation {
     }
     return tfCheck;
   }
-}
+}*/
